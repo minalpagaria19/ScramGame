@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            height:550px;
+            background-color: #b2defb;
+            width:100%;
+        }
+        .box1{
+            text-align: center;
+             letter-spacing: 7px;
+             height:100px;
+             background-color: #092c44;
+             color:white;
+             line-height:20vh;
+        }
+        .box2{
+            height:400px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .btn{
+            padding:10px 20px;
+            background-color: #092c44;
+            color:white;
+            border: none;
+            font-size: 20px;
+            transition: 1s;
+        }
+        .btn:hover{
+                  letter-spacing: 3px;
+                  word-spacing: 2px;
+        }
+        .box21{
+            display: none;
+        }
+        #inp{
+            display: none;
+            border-radius: 20px;
+            height:50px;
+            font-size:20px;
+            border: none;
+            outline: none;
+        }
+        #inp:focus{
+            border:none;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="box1">
+            <h1>word scaremble game</h1>
+        </div>
+        <div class="box2">
+            <h2 class="box21" id="scram">guess the word :
+                <span id="scram1"></span>
+            </h2>
+            <h2 id="showans"></h2>
+            <input  type="text" id="inp"><br>
+            <button class="btn" id="btn">click here to start</button>
+
+        </div>
+    </div>
+    <script>
+            var x1=document.getElementById("scram");
+            var x2=document.getElementById("inp");
+            var x3=document.getElementById("btn");
+            var n1,m1,m2;
+            var arr=["apple","boy","cat","dog","elephant","fake","grapes","hourse","kite","lion","monkey","owl"];
+            const creatr = ()=>{
+                var i=Math.floor(Math.random()*arr.length);
+                var n=arr[i];
+                return n;
+                console.log(n);
+            }
+            var text=" ";  
+            const scramble = (as)=>{
+
+                         var i1, j1, k1;
+                        for (i1 = as.length -1; i1 > 0; i1--) {
+                            j1 = Math.floor(Math.random() * i1)
+                            k1 = as[i1]
+                            as[i1] = as[j1]
+                            as[j1] = k1
+                        }
+   
+                    
+                    return as.join("");
+                    console.log(as.join("*"));
+                }
+                var play=false;
+                x3.addEventListener("click",function(){
+                if(!play){
+                    play=true;
+                    x3.innerHTML="Guess";
+                    x1.style.display="block";
+                    x2.style.display="block";
+                    n1=creatr();
+                    console.log(n1);
+                    m1=scramble(n1.split(""));
+                    document.getElementById("scram1").innerHTML=m1;
+                    document.getElementById("showans").innerHTML="";
+                    x2.value="";    
+                }else{
+                    var gueesword=x2.value;
+                    if(gueesword==n1){
+                        document.getElementById("showans").innerHTML="right answer";
+                        document.getElementById("scram1").innerHTML="";
+                        x3.innerHTML="start";
+                        x1.style.display="none";
+                        x2.style.display="none";
+                        play=false;
+                    text = "";
+                    }else{
+                        alert("wrong");
+                    text = "";
+
+                    }
+                } 
+                })
+        </script>
+    </body>
+    </html>
